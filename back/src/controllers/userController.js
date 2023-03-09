@@ -18,11 +18,14 @@ exports.create = async (req, res) => {
             message: "User created successfully!!",
             user: data
         });
+        console.log("User created successfully!!");
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating user"
         });
+        console.log(err.message);
     });
+
 };
 
 // ---------------------------------- Retrieve all users from the database ----------------------------------
@@ -77,10 +80,12 @@ exports.destroy = async (req, res) => {
             res.status(404).send({
                 message: `User not found.`
             });
+            console.log("User not found")
         } else {
             res.send({
                 message: "User deleted successfully!"
             });
+            console.log("User deleted successfully!");
         }
     }).catch(err => {
         res.status(500).send({

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
 function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -32,6 +33,7 @@ function LoginPage() {
                 <Form.Control type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
             </Form.Group>
 
+            <br />
             <Button className='btn-primary' type="submit">
                 Login
             </Button>

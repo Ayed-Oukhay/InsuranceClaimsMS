@@ -10,7 +10,8 @@ function Homepage() {
         <img src="" alt="logo" />
         <div className="menu">
           <Link to="/login">Login</Link>
-          {/* <Link to="/login">Signup</Link> */}
+          <br />
+          <Link to="/user">Signup</Link>
         </div>
       </nav>
     </div>
