@@ -3,8 +3,8 @@
 
 ## Description
 [Desc....]
-- To run the backend app, run the following command: ```npm start``` -> This will run the backend server, as well as the mongoDB instance (created through Atlas)
-- To run the frontend app, run the following command: ```npm start```
+- To run the backend app alone, run the following command: ```npm start``` -> This will run the backend server, as well as the mongoDB instance (created through Atlas)
+- To run the frontend app alone, run the following command: ```npm start```
 
 
 ## Technologies / Tools
@@ -20,12 +20,20 @@ Used libraries:
 - ```Helmet```: helps you secure your Express apps by setting various HTTP headers. 
 - ```cors```: (Cross-Origin Resource Sharing) is a security feature designed to prevent malicious websites from stealing data from legitimate websites. the cors library is a package for providing a Connect/Express server-side middleware that can be used to enable CORS with various options.
 - ```body-parser```: Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+<!-- ```cloudinary```: provides simple image and video upload, transformation, optimization, and delivery capabilities that you can implement using code that integrates seamlessly with your existing Node.js application. -->
+- ```multer```: Multer is a middleware for handling multipart/form-data, which is primarily used for uploading files in Node.js web applications. It allows you to handle data that is being submitted from forms containing files, such as images or videos, and store them on your server.
 
 
 ### Frontend (React):
 - ```MaterialUI```: React UI component library for shipping new features faster.
 - ```Redux```: state management library that provides a centralized store that holds all the application's state.
 - ```React-Bootstrap```: front-end framework for building responsive and mobile-first web applications using React.
+<!-- ```concurrently```: This will allow us to automate the task of starting our React app and our web server concurrently.
+We need to include the following scripts in the package.json file to use concurrently:
+    "backend": "node ../back/src/server.js",
+    "frontend": "set PORT=3006 && react-scripts start",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"" -->
+
 
 ### DB: MongoDB (Mongo Atlas)
 

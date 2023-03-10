@@ -1,8 +1,25 @@
 const UserModel = require('../models/user');
+/* const cloudinary = require('cloudinary').v2;
+require("dotenv").config(); */
 
 // ---------------------------------- Create and Save a new user ----------------------------------
 exports.create = async (req, res) => {
 
+    // ? --- Using Cloudinary to upload the user's profile picture ---
+    /* cloudinary.config({
+        cloud_name: process.env.CLOUD_NAME,
+        api_key: process.env.API_KEY,
+        api_secret: process.env.API_SECRET,
+    });
+    async function handleUpload(file) {
+        const res = await cloudinary.uploader.upload(file, {
+            resource_type: "auto",
+        });
+        return res;
+    } */
+    // ? ---------------------------------------------------------------
+
+    // ? --- Creating the User object ---
     const user = new UserModel({
         firstname: req.body.firstname,
         lastname: req.body.lastname,
@@ -10,7 +27,8 @@ exports.create = async (req, res) => {
         phone: req.body.phone,
         email: req.body.email,
         address: req.body.address,
-        status: req.body.status
+        status: req.body.status,
+        img: user_img
     });
 
     await user.save().then(data => {
