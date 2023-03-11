@@ -32,7 +32,9 @@ const userRoutes = require('./routes/userRoutes.js');
 
 // ? ------------------ Middlewares ------------------
 app.use(cors()); // Enable cross-origin resource sharing
-app.use(bodyParser.json()); // Parse incoming request bodies as JSON
+app.use(bodyParser.json({ limit: '10mb' })); // Parse incoming request bodies as JSON
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+
 
 
 // ? ------------------ using the routes ------------------

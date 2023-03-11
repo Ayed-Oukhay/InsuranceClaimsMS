@@ -28,7 +28,7 @@ exports.create = async (req, res) => {
         email: req.body.email,
         address: req.body.address,
         status: req.body.status,
-        img: user_img
+        img: req.body.img
     });
 
     await user.save().then(data => {

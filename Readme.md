@@ -17,7 +17,7 @@ Used libraries:
 - ```Async```: 
 - ```Mocha```: 
 - ```mongoose: a MongoDB object modeling tool designed to work in an asynchronous environment.
-- ```Helmet```: helps you secure your Express apps by setting various HTTP headers. 
+- ```Helmet```: middleware for Node.js web applications that helps to secure them by setting various HTTP headers which can help to mitigate common web application security vulnerabilities.
 - ```cors```: (Cross-Origin Resource Sharing) is a security feature designed to prevent malicious websites from stealing data from legitimate websites. the cors library is a package for providing a Connect/Express server-side middleware that can be used to enable CORS with various options.
 - ```body-parser```: Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 <!-- ```cloudinary```: provides simple image and video upload, transformation, optimization, and delivery capabilities that you can implement using code that integrates seamlessly with your existing Node.js application. -->
@@ -38,7 +38,7 @@ We need to include the following scripts in the package.json file to use concurr
 ### DB: MongoDB (Mongo Atlas)
 
 ### Docker:
-- ```Dockerfile```: 
+- ```Dockerfile```: specifies the dependencies and configuration needed for your application, and we use ```docker build``` command to create a Docker image from the Dockerfile, that can then be used to deploy the application in a containerized environment.
 
 
 ### Git
