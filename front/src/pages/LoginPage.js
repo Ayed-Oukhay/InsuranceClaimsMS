@@ -2,31 +2,44 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 
 
 function LoginPage() {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         // submit form data to server for authentication
-
-        // redirect to home page
-        navigate.push('/home');
+        // ? ------- calling the backend api and returning the response from the server -------
+        fetch('http://localhost:3000/user/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            // body: JSON.stringify({ firstname, lastname, cin, phone, email, address, status, img })
+            body: JSON.stringify({ username, password })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('User authenticated successfully:', data);
+                // redirect to home page
+                // navigate.push('/home');
+            })
+            .catch(error => {
+                console.error('Error authenticating the user:', error);
+            });
     };
 
     return (
         <div>
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" value={email} onChange={(event) => setEmail(event.target.value)} />
+                <Form.Group controlId="formBasicUsername">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type="text" placeholder="Enter your username" value={username} onChange={(event) => setUsername(event.target.value)} />
                     <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
+                        We'll never share your username with anyone else.
                     </Form.Text>
                 </Form.Group>
 

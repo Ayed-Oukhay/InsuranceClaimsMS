@@ -1,50 +1,5 @@
 const UserModel = require('../models/user');
-/* const cloudinary = require('cloudinary').v2;
-require("dotenv").config(); */
 
-// ---------------------------------- Create and Save a new user ----------------------------------
-exports.create = async (req, res) => {
-
-    // ? --- Using Cloudinary to upload the user's profile picture ---
-    /* cloudinary.config({
-        cloud_name: process.env.CLOUD_NAME,
-        api_key: process.env.API_KEY,
-        api_secret: process.env.API_SECRET,
-    });
-    async function handleUpload(file) {
-        const res = await cloudinary.uploader.upload(file, {
-            resource_type: "auto",
-        });
-        return res;
-    } */
-    // ? ---------------------------------------------------------------
-
-    // ? --- Creating the User object ---
-    const user = new UserModel({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        cin: req.body.cin,
-        phone: req.body.phone,
-        email: req.body.email,
-        address: req.body.address,
-        status: req.body.status,
-        img: req.body.img
-    });
-
-    await user.save().then(data => {
-        res.send({
-            message: "User created successfully!!",
-            user: data
-        });
-        console.log("User created successfully!!");
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while creating user"
-        });
-        console.log(err.message);
-    });
-
-};
 
 // ---------------------------------- Retrieve all users from the database ----------------------------------
 exports.findAll = async (req, res) => {
@@ -110,4 +65,17 @@ exports.destroy = async (req, res) => {
             message: err.message
         });
     });
+};
+
+// ---------------------------------- Test current user access rights ----------------------------------
+exports.allAccess = (req, res) => {
+    res.status(200).send("Public Content.");
+};
+
+exports.userBoard = (req, res) => {
+    res.status(200).send("User Content.");
+};
+
+exports.adminBoard = (req, res) => {
+    res.status(200).send("Admin Content.");
 };

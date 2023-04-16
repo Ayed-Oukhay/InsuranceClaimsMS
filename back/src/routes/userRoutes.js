@@ -4,22 +4,33 @@ const router = express.Router();
 
 
 // ? ------------- Using the controller methods ---------------
+module.exports = function (app) {
+    router.use(function (req, res, next) {
+        res.header(
+            "Access-Control-Allow-Headers",
+            "x-access-token, Origin, Content-Type, Accept"
+        );
+        next();
+    });
 
-// ----------- Create user -------------
-router.post('/', UserController.create);
+    // * ----------- Get all users -------------
+    router.get('/', UserController.findAll);
 
-// ----------- Get all users -------------
-router.get('/', UserController.findAll);
+    // * ----------- Get a specific user -------------
+    router.get('/:id', UserController.findOne);
 
-// ----------- Get a specific user -------------
-router.get('/:id', UserController.findOne);
+    // * ----------- Update user -------------
+    router.patch('/:id', UserController.update);
 
-// ----------- Update user -------------
-router.patch('/:id', UserController.update);
+    // * ----------- Delete user -------------
+    router.delete('/:id', UserController.destroy);
 
-// ----------- Delete user -------------
-router.delete('/:id', UserController.destroy);
+    // module.exports = router;
 
+    // ? --- Testing the API access rights of the current connected user ---
+    router.get("/test/all", UserController.allAccess);
 
+    router.get("/test/user", [authJwt.verifyToken], UserController.userBoard);
 
-module.exports = router;
+    router.get("/test/admin", [authJwt.verifyToken, authJwt.isAdmin], UserController.adminBoard);
+};

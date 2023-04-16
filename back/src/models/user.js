@@ -1,21 +1,3 @@
-/* User properties:
-- Id (wallet ID probably)
-- username
-- password
-- First name
-- Last name
-- CIN
-- Num raison sociale
-- Tel
-- Address
-- Status
-- Email
-- Occupation
-- Carte grise (?)
-- img
-- ...
- */
-
 // ? This file holds the definition of a BaseUser and a user type to store all files related to users
 var mongoose = require('mongoose');
 
@@ -27,14 +9,15 @@ var schema = new mongoose.Schema({
         unique: true,
         lowercase: true
     }, */
-    /* username: {
+    username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true
-    }, */
+        required: true,
+    },
     firstname: {
         type: String,
         required: true
@@ -61,10 +44,15 @@ var schema = new mongoose.Schema({
         type: String,
         enum: ['Single', 'Married', 'Divorced', 'Other'],
     },
-    img: {
+    role: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Role",
+        default: "User"
+    }
+    /* img: {
         type: String,
         default: ""
-    },
+    }, */
     // occupation: {
     //     type: String,
     //     required: true
