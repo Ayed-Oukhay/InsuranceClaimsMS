@@ -1,10 +1,11 @@
-const UserModel = require('../models/user');
-const RoleModel = require('../models/role');
+const db = require("../models/db");
+const ROLES = db.ROLES;
+const User = db.user;
 
 // ! --- Checking for duplicate username or email ---
 checkDuplicateUsernameOrEmail = (req, res, next) => {
     // Username
-    UserModel.findOne({
+    User.findOne({
         username: req.body.username
     }).exec((err, user) => {
         if (err) {
@@ -17,7 +18,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
         }
 
         // Email
-        UserModel.findOne({
+        User.findOne({
             email: req.body.email
         }).exec((err, user) => {
             if (err) {
@@ -36,7 +37,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
 // ! --- Checking if the provided role exists ---
 checkRolesExisted = (req, res, next) => {
     if (req.body.role) {
-        if (!RoleModel.includes(req.body.role)) {
+        if (!ROLES.includes(req.body.role)) {
             res.status(400).send({
                 message: `Failed! Role ${req.body.role} does not exist!`
             });

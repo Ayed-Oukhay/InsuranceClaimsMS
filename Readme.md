@@ -1,5 +1,5 @@
 # [Project Name]
-Application web de gestion de sinistres d'une companie d'assurance en utilisant le fullstack MERN, ainsi que Docker, Git, ...
+This is an Insurance company's Claim management web app, built using the MERN Full-Stack, Docker, Git, ...
 
 ## Description
 [Desc....]

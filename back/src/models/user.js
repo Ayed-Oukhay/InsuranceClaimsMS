@@ -3,42 +3,17 @@ var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
     // We don't need to specify an Id, as by default, Mongoose adds an _id property to your schemas.
-    /* walletAddresses: {
-        type: [String],
-        required: true,
-        unique: true,
-        lowercase: true
-    }, */
     username: {
         type: String,
         required: true,
         unique: true
     },
-    password: {
-        type: String,
-        required: true,
-    },
-    firstname: {
-        type: String,
-        required: true
-    },
-    lastname: {
-        type: String,
-        required: true
-    },
-    cin: {
-        type: Number,
-        required: true
-    },
-    phone: {
-        type: Number,
-        required: true
-    },
     email: {
         type: String,
     },
-    address: {
+    password: {
         type: String,
+        required: true,
     },
     status: {
         type: String,
@@ -49,14 +24,6 @@ var schema = new mongoose.Schema({
         ref: "Role",
         default: "User"
     }
-    /* img: {
-        type: String,
-        default: ""
-    }, */
-    // occupation: {
-    //     type: String,
-    //     required: true
-    // }
 });
 
 var User = new mongoose.model('User', schema);

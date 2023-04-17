@@ -3,13 +3,13 @@
 // ? the provided role of the user contains the required role or not
 
 const jwt = require("jsonwebtoken");
-const db = require("../models");
+const db = require("../models/db");
 const Role = db.Role;
 const User = db.User;
 
 require("dotenv").config();
 
-// ? --- Verify that the token exists
+// ? --- Verify that the token exists ---
 verifyToken = (req, res, next) => {
     let token = req.headers["x-access-token"];
 
@@ -26,7 +26,7 @@ verifyToken = (req, res, next) => {
     });
 };
 
-// ? --- Check if the user has "Admin" rights
+// ? --- Check if the user has "Admin" rights ---
 isAdmin = (req, res, next) => {
     User.findById(req.userId).exec((err, user) => {
         if (err) {

@@ -1,11 +1,6 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-    /* _id: {
-        type: Schema.Types.ObjectId,
-        auto: true,
-        required: true
-    }, */
     user: {
         ref: 'User',
         required: true

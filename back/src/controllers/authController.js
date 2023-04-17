@@ -1,29 +1,24 @@
-const UserModel = require('../models/user');
-const Role = require('../models/role');
+const db = require("../models/db");
+const User = db.user;
+const Role = db.role;
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 require("dotenv").config();
 
-// ---------------------------------- Signup a new user ----------------------------------
-exports.create = async (req, res) => {
+// ? ---------------------------------- Signup a new user ----------------------------------
+exports.signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     // ? --- Creating the User object ---
-    const user = new UserModel({
+    const user = new User({
         username: req.body.username,
-        password: hashedPassword,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        cin: req.body.cin,
-        phone: req.body.phone,
         email: req.body.email,
-        address: req.body.address,
+        password: hashedPassword,
         status: req.body.status,
         role: req.body.role
-        // img: req.body.img
     });
 
     user.save((err, user) => {
@@ -32,6 +27,7 @@ exports.create = async (req, res) => {
             return;
         }
 
+        // ! Checking if the provided role is a valid one
         if (req.body.role) {
             Role.find({ name: { $in: req.body.role } }, (err, role) => {
                 if (err) {
@@ -45,12 +41,12 @@ exports.create = async (req, res) => {
                         res.status(500).send({ message: err });
                         return;
                     }
-
                     res.send({ message: "User was registered successfully!" });
                 });
             }
             );
         } else {
+            // ! if it's not, the user is registered as a 'user'
             Role.findOne({ name: "user" }, (err, role) => {
                 if (err) {
                     res.status(500).send({ message: err });
@@ -63,7 +59,6 @@ exports.create = async (req, res) => {
                         res.status(500).send({ message: err });
                         return;
                     }
-
                     res.send({ message: "User was registered successfully!" });
                 });
             });
@@ -85,7 +80,7 @@ exports.create = async (req, res) => {
 
 };
 
-// ---------------------------------- Login user ----------------------------------
+// ? ---------------------------------- Login user ----------------------------------
 exports.login = async (req, res) => {
     const { username, password } = req.body;
 
@@ -113,6 +108,11 @@ exports.login = async (req, res) => {
     // ! The sign() function uses algorithm that needs a secret key (as String) to encode and decode token, and this token in our case expires after 24hours
     const token = jwt.sign({ userId: user._id }, process.env.jwt_secret, { expiresIn: 86400 });
 
+    // ? Adding the role
+    var authorities = [];
+    authorities.push("ROLE_" + user.role.name.toUpperCase());
+
+    // ? returning the request's response
     res.status(200).json({
         status: 'user authenticated successfully',
         id: user._id,
