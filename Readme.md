@@ -1,4 +1,4 @@
-# [Project Name]
+# ICMS Project
 This is an Insurance company's Claim management web app, built using the MERN Full-Stack, Docker, Git, ...
 
 ## Description
